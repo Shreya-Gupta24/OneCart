@@ -12,7 +12,7 @@ import { HiOutlineCollection } from "react-icons/hi";
 import { MdContacts } from "react-icons/md";
 import axios from 'axios';
 import {shopDataContext} from '../context/ShopContext.jsx'
-import { authDataContext } from '../context/authContext.jsx';
+import { authDataContext } from '../context/AuthContext.jsx';
 
 const Nav = () => {
     let {userData, setUserData}=useContext(userDataContext);
