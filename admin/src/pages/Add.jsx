@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { authDataContext } from '../context/AuthContext.jsx'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Loading from '../components/Loading.jsx'
+import Loading from '../component/Loading.jsx'
 
 function Add() {
   let [image1,setImage1] = useState(false)
