@@ -19,9 +19,9 @@ export const register = async (req, res) => {
         const user = await User.create({name,email,password:hashedPassword});
         let token= await gentoken(user._id);
         res.cookie("token", token, {
-            http: true,
+            httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "None",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         return res.status(200).json({message:"User registered successfully", user});
@@ -44,9 +44,9 @@ export const login= async(req, res) => {
         }
         let token= await gentoken(user._id);
         res.cookie("token", token, {
-            http: true,
+            httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "None",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         return res.status(200).json({message:"User logged in successfully", user});
@@ -57,7 +57,12 @@ export const login= async(req, res) => {
 
 export const logOut= async(req, res) => {
     try {
-        res.clearCookie("token");
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
         return res.status(200).json({message:"User logged out successfully"});
     } catch (error) {
         return res.status(500).json({message:"Something went wrong"});
@@ -67,15 +72,15 @@ export const logOut= async(req, res) => {
 export const googleLogin= async(req, res) => {
     try {
         let {name, email}= req.body;
-        const user= await User.findOne({email});
+        let user= await User.findOne({email});
         if(!user){
             user= await User.create({name,email});
         }
         let token= await gentoken(user._id);
         res.cookie("token", token, {
-            http: true,
+            httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "None",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         return res.status(200).json({message:"User logged in successfully", user});
@@ -92,9 +97,9 @@ export const adminLogin= async(req, res) => {
         }
         let token= await gentoken1(email);
         res.cookie("token", token, {
-            http: true,
+            httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "None",
             maxAge: 1 * 24 * 60 * 60 * 1000
         })
         return res.status(200).json({message:"Admin logged in successfully"});
