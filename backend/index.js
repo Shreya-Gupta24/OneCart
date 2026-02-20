@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-    origin: ["https://one-cart-ecommerce.vercel.app", "http://localhost:5174"],
+    origin: ["https://one-cart-ecommerce.vercel.app", "https://one-cart-ecommerce-admin.vercel.app"],
     credentials: true
 }))
 app.use((req, res, next) => {
